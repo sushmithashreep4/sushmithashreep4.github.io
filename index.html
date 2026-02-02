@@ -22,10 +22,6 @@
       text-align: center;
       position: relative;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
     }
 
     h1 {
@@ -36,7 +32,6 @@
     .buttons {
       position: relative;
       height: 80px;
-      width: 100%;
     }
 
     button {
@@ -65,10 +60,6 @@
       margin-top: 20px;
       font-size: 28px;
       color: #ff2e63;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
     }
 
     .result img {
@@ -90,7 +81,7 @@
     </div>
 
     <div class="result" id="result">
-      <div>Good decision</div>
+      Good decision
       <img src="https://media.tenor.com/Teg9CKLqtFwAAAAe/good-boy.png" alt="Good Boy">
     </div>
   </div>
@@ -99,6 +90,7 @@
     const noBtn = document.getElementById("no");
     const card = document.getElementById("card");
 
+    // Function to move NO button randomly
     function moveNo() {
       const maxX = card.offsetWidth - noBtn.offsetWidth;
       const maxY = card.offsetHeight - noBtn.offsetHeight;
@@ -110,12 +102,14 @@
       noBtn.style.top = randomY + "px";
     }
 
+    // Move NO button when mouse gets close
     card.addEventListener("mousemove", function(e) {
       const noRect = noBtn.getBoundingClientRect();
       const distanceX = Math.abs(e.clientX - (noRect.left + noRect.width/2));
       const distanceY = Math.abs(e.clientY - (noRect.top + noRect.height/2));
       const distance = Math.sqrt(distanceX*distanceX + distanceY*distanceY);
 
+      // If cursor is within 100px of NO button, move it
       if(distance < 120) {
         moveNo();
       }
@@ -123,11 +117,14 @@
 
     function yesClicked() {
       document.querySelector(".buttons").style.display = "none";
-      document.getElementById("result").style.display = "flex";
+      document.getElementById("result").style.display = "block";
     }
 
+    // Keep NO button inside card on resize
     window.addEventListener("resize", moveNo);
-    moveNo(); // initial position
+
+    // Initial NO button position
+    moveNo();
   </script>
 
 </body>
